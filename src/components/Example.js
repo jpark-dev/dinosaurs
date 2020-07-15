@@ -2,14 +2,20 @@
 import React, { useState, useEffect } from 'react';
 
 const Example = () => {
-    // declare [state, updateState] = useState(initialValue)
-    const [state, setState] = useState(0);
+    // declare a [state, updateState] = set(initialValue) 
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        // Update document title using brower API 
+        document.title = `You clicked ${count} times`;
+    });
 
     // render component
     return (
         <div>
-            <button>
-                Update State 
+            <p> You clicked {count} times </p>
+            <button onClick={ () => setCount(count + 1) } >
+                Click Me! 
             </button>
         </div>
     )
