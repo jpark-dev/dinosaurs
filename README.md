@@ -36,7 +36,7 @@ To access the React Hook useEffect in a component:
 - **import** useEffect in the component file
 - **set up** the callback function
 
-For a more technical explanation, [refer to the docs](https://reactjs.org/docs/hooks-reference.html#usestate) 
+For a more technical explanation, [refer to the docs here.](https://reactjs.org/docs/hooks-reference.html#usestate) 
 
 
 We've provided a sample in the starter code (this repo) demonstrating how you might use both hooks to implement changing the document title. Here it is below as well:
