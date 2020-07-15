@@ -2,7 +2,7 @@
 
 ## Challenge Scope
 
-This repository contains the fourth Dinasour coding challenge that will be taking place on July 18th. Participant submissions can be found at the bottom of this document!
+This repository contains the fourth Dinasours coding challenge taking place on July 18, 2020.  Participant submissions can be found at the bottom of this document!
 
 ## Overview
 
@@ -14,108 +14,80 @@ Examples of state in React are:
 - A string containing a color value that updates the background color
 - An integer holding a user's score in a game
 
-## React Hooks: Implementing state
+Other times, you may want to perform side effects. Effects run after every completed render.  Examples of side effects in React are:
 
-The basic way of adding state to a component is as follows:
+- Data fetching
+- Setting up a subscription 
+<!-- (similar to queries, but instead of immediately returning a single answer, a result set of fields are sent upon event trigger on the server) -->
+- Manually changing the DOM
+- Other mutations, timers, logging, etc.
+
+## React Hooks: Implementation
+
+To access the React Hook useState in a component:
 
 - **import** useState in the component file
-- **set up** the **state value** and the **state updater function**, as well as the **initial value**
+- **set up** the **state value**, **state updater function**, and the **initial value**
 - **access** the state value by using the state value
 - **update** the state value by using the state updater function
 
-[Here's a great resource](https://reactjs.org/docs/hooks-reference.html#usestate) if you want the more technical explanation for useState.
+To access the React Hook useEffect in a component:
 
-We've provided some sample code in the starter code demonstrating how you might use the useState hook to implement a really simple timer. Here it is below:
+- **import** useEffect in the component file
+- **set up** the callback function
+
+For a more technical explanation, [refer to the docs](https://reactjs.org/docs/hooks-reference.html#usestate) 
+
+
+We've provided a sample in the starter code (this repo) demonstrating how you might use both hooks to implement changing the document title. Here it is below as well:
 
 ```javascript
-// importing useState
-import React, { useState } from "react";
+// import React Hooks
+import React, { useState, useEffect } from 'react';
 
-const ReferenceComponent = () => {
-  // initial value variable
-  const initialValue = 0;
+const Example = () => {
+    // declare a [state, updateState] = set(initialValue) 
+    const [count, setCount] = useState(0);
 
-  // state declaration holding [value, updateFunction]
-  const [stateValue, stateUpdater] = useState(initialValue);
+    useEffect(() => {
+        // Update document title using brower API 
+        document.title = `You clicked ${count} times`;
+    });
 
-  // component render
-  return (
-    <div>
-      {/* lets display our state in a p tag */}
-      <p>{stateValue}</p>
+    // render component
+    return (
+        <div>
+            <p> You clicked {count} times </p>
+            <button onClick={ () => setCount(count + 1) } >
+                Click Me! 
+            </button>
+        </div>
+    )
+}
 
-      {/* lets provide a button to update our state */}
-      <button onClick={() => stateUpdater(previousState => previousState + 1)}>
-        Click Me!
-      </button>
-    </div>
-  );
-};
-
-export default ReferenceComponent;
+export default Example;
 ```
-## React Hooks: Implementing useEffect
-
-<!-- The basic way of adding state to a component is as follows:
-
-- **import** useState in the component file
-- **set up** the **state value** and the **state updater function**, as well as the **initial value**
-- **access** the state value by using the state value
-- **update** the state value by using the state updater function
-
-[Here's a great resource](https://reactjs.org/docs/hooks-reference.html#usestate) if you want the more technical explanation for useState.
-
-We've provided some sample code in the starter code demonstrating how you might use the useState hook to implement a really simple timer. Here it is below:
-
-```javascript
-// importing useState
-import React, { useState } from "react";
-
-const ReferenceComponent = () => {
-  // initial value variable
-  const initialValue = 0;
-
-  // state declaration holding [value, updateFunction]
-  const [stateValue, stateUpdater] = useState(initialValue);
-
-  // component render
-  return (
-    <div>
-      {/* lets display our state in a p tag */}
-      <p>{stateValue}</p>
-
-      {/* lets provide a button to update our state */}
-      <button onClick={() => stateUpdater(previousState => previousState + 1)}>
-        Click Me!
-      </button>
-    </div>
-  );
-};
-
-export default ReferenceComponent; -->
 
 
-## The Challenge: Build Your Own Counter
+## The Challenge: Connect to an API! 
 
-Now that you have a basic understanding of how state works and how we used it to build a really simple counter, we want you to flex your own creative developer muscles and **build your own counter**.
+Now that you have a basic understanding of how state and effects work, we want you to flex your creative muscles and **connect to one of the following APIs**.
+
+1.  [Poké API](pokeapi.co)
+2.  [News API](newsapi.org)
+3.  [Trivia API](https://opentdb.com/api_config.php)
+4.  [Joke API](https://rapidapi.com/Sv443/api/jokeapi)
+5.  [Cocktail DB](https://www.thecocktaildb.com/api.php)
+
 
 If you want to get the most out of this challenge:
 
-- Diagram/Plan what you want to make
+- Diagram/Plan how you want to display the API data 
 - Create your own class/functional component from scratch!
   - **Use the ReferenceComponent.js as a guide, DO NOT copy/paste it!**
 - Render your new component in App
 - Add the basic functionality and test as you go
 - Share your creation with the rest of us!
-
-## But... you already built a counter!
-
-Sometimes iterating on a simple design is a great way to learn. There are so many types of counters out there. Here are a couple ideas to consider when brainstorm some designs:
-
-- What if your counter updates every second?
-- What if something special happens based on a specific value of the counter?
-- What if you connect multiple counters so they use each others' value?
-- Are there any other types of values that would be fun to hold in state (booleans, strings etc.)?
 
 Be creative, be silly, and use the internet for inspiration! This is an opportunity to challenge yourself and have fun!
 
