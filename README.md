@@ -50,7 +50,7 @@ const Example = () => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        // Update document title using brower API 
+        // Update document title using the browser API 
         document.title = `You clicked ${count} times`;
     });
 
@@ -69,7 +69,7 @@ export default Example;
 ```
 
 
-## The Challenge: Connect to an API! 
+## The Challenge: Connect to an API with useEffect!
 
 Now that you have a basic understanding of how state and effects work, we want you to flex your creative muscles and **connect to one of the following APIs**.
 
