@@ -73,8 +73,8 @@ export default Example;
 
 Now that you have a basic understanding of how state and effects work, we want you to flex your creative muscles and **connect to one of the following APIs**.
 
-1.  [Poké API](pokeapi.co)
-2.  [News API](newsapi.org)
+1.  [Poké API](https://pokeapi.co)
+2.  [News API](https://newsapi.org/)
 3.  [Trivia API](https://opentdb.com/api_config.php)
 4.  [Joke API](https://rapidapi.com/Sv443/api/jokeapi)
 5.  [Cocktail DB](https://www.thecocktaildb.com/api.php)
