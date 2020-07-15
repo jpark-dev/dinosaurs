@@ -1,5 +1,6 @@
 // import React Hooks
 import React, { useState, useEffect } from 'react';
+import './example.css';
 
 const Example = () => {
     // declare a [state, updateState] = set(initialValue) 
@@ -13,7 +14,8 @@ const Example = () => {
     // render component
     return (
         <div>
-            <p> You clicked {count} times </p>
+            <p> Number of clicks: </p>
+            <div id="counter"> {count} </div>
             <button onClick={ () => setCount(count + 1) } >
                 Click Me! 
             </button>
