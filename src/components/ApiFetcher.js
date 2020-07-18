@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApiFetcher() {
   const classes = useStyles();
-
+  const [itemData, setItemData] = useState([]);
   const [itemList, setItemList] = useState([]);
   const [currentItemList, setCurrentItemList] = useState([]);
 
@@ -24,14 +24,21 @@ export default function ApiFetcher() {
     fetch(targetAPI)
       .then(data => data.json())
       .then(jsonData => {
+        setItemData(jsonData);
         setItemList(getRandArr(jsonData.results));
       });
   }, []);
 
   const addToList = name => {
     setCurrentItemList([...currentItemList, ` ${name}`]);
-    const filteredArr = itemList.filter(e => {return e.name !== name});
+    const filteredArr = itemList.filter(e => {
+      return e.name !== name;
+    });
     setItemList(filteredArr);
+  };
+
+  const fetchNewList = itemData => {
+    setItemList(getRandArr(itemData.results))
   };
 
   return (
@@ -51,6 +58,20 @@ export default function ApiFetcher() {
           </Button>
         ))}
       </Container>
+
+      <AppBar position='static'>
+        <p> A set of wild items has appeared!</p>
+      </AppBar>
+
+      <Container className={classes.button} >
+        <Button variant='contained' color='secondary' onClick={() => fetchNewList(itemData)}>
+          <p>Get more items!</p>
+        </Button>
+      </Container>
+
+      <AppBar position='static'>
+        <p>Your current items: </p>
+      </AppBar>
 
       <Container className={classes.button}>
         {currentItemList.map(item => (
