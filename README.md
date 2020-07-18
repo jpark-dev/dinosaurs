@@ -39,7 +39,9 @@ To access the React Hook useEffect in a component:
 For a more technical explanation, [refer to the docs here.](https://reactjs.org/docs/hooks-reference.html#usestate) 
 
 
-We've provided a sample in the starter code (this repo) demonstrating how you might use both hooks to implement changing the document title. Here it is below as well:
+We've provided samples in the starter code (this repo) demonstrating how you might use both hooks.
+
+1.  Changing the document title with useEffect:
 
 ```javascript
 // import React Hooks
@@ -68,6 +70,19 @@ const Example = () => {
 export default Example;
 ```
 
+2. Fetching data from an API with useEffect:
+
+```javascript
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    fetch(API_URL) // use JavaScript's fetch method to get data from an API
+      .then(resp => resp.json()) // take the API response and turn it into JSON
+      .then(json => {
+        setState(json.results); // update the value of state with results array
+      });
+  }, []);
+```
 
 ## The Challenge: Connect to an API with useEffect!
 
