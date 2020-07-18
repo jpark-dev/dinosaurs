@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
 import getRandArr from "../helpers/getRandArr";
+import { Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 export default function ApiFetcher() {
+  const classes = useStyles();
+
   const [itemList, setItemList] = useState([]);
+  const [currentItemList, setCurrentItemList] = useState([]);
 
   useEffect(() => {
     console.log("useEffect fired!");
@@ -16,11 +29,11 @@ export default function ApiFetcher() {
   }, []);
 
   return (
-    <div>
+    <div className={classes.root}>
       {itemList.map(item => (
-        <div key={item.name}>
-          <p>{item.name}</p>
-        </div>
+        <Button key = {item.name} variant='contained'>
+            <p>{item.name}</p>
+        </Button>
       ))}
     </div>
   );
