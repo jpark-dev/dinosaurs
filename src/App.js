@@ -1,13 +1,10 @@
 import React from "react";
-// import Example from './components/Example';
-import ApiExample from "./components/ApiExample";
+import ApiFetcher from "./components/ApiFetcher";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <ApiExample />
+      <ApiFetcher />
     </div>
   );
-}
-
-export default App;
+};
