@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function ApiFetcher() {
   const classes = useStyles();
+
   const [itemData, setItemData] = useState([]);
   const [itemList, setItemList] = useState([]);
   const [currentItemList, setCurrentItemList] = useState([]);
@@ -29,16 +30,30 @@ export default function ApiFetcher() {
       });
   }, []);
 
-  const addToList = name => {
-    setCurrentItemList([...currentItemList, ` ${name}`]);
-    const filteredArr = itemList.filter(e => {
-      return e.name !== name;
-    });
-    setItemList(filteredArr);
+  const fetchNewList = itemData => {
+    setItemList(getRandArr(itemData.results));
   };
 
-  const fetchNewList = itemData => {
-    setItemList(getRandArr(itemData.results))
+  const addToList = (name, itemData) => {
+    // Do not have if users have selected 6 items
+
+    const msg = "You already have 6 items!";
+
+    if (currentItemList.length <= 5) {
+      setCurrentItemList([...currentItemList, ` ${name}`]);
+    } else {
+      return alert(msg);
+    }
+
+    // Remove the selected item from the item suggestion list
+    const filteredArr = itemList.filter(e => e.name !== name);
+
+    // refresh the list if there is no items left
+    !filteredArr.length ? fetchNewList(itemData) : setItemList(filteredArr);
+  };
+
+  const removeFromList = name => {
+    console.log(`${name} remove!`);
   };
 
   return (
@@ -52,7 +67,7 @@ export default function ApiFetcher() {
           <Button
             key={item.name}
             variant='contained'
-            onClick={() => addToList(item.name)}
+            onClick={() => addToList(item.name, itemData)}
           >
             <p>{item.name}</p>
           </Button>
@@ -63,8 +78,12 @@ export default function ApiFetcher() {
         <p> A set of wild items has appeared!</p>
       </AppBar>
 
-      <Container className={classes.button} >
-        <Button variant='contained' color='secondary' onClick={() => fetchNewList(itemData)}>
+      <Container className={classes.button}>
+        <Button
+          variant='contained'
+          color='secondary'
+          onClick={() => fetchNewList(itemData)}
+        >
           <p>Get more items!</p>
         </Button>
       </Container>
@@ -78,7 +97,7 @@ export default function ApiFetcher() {
           <Button
             key={item}
             variant='contained'
-            // onClick={() => removeFromList(item.name)}
+            onClick={() => removeFromList(item)}
           >
             <p>{item}</p>
           </Button>
