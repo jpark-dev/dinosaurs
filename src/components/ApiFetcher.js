@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import getRandArr from "../helpers/getRandArr";
-import { Button } from "@material-ui/core";
+import { AppBar, Container, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    '& > *': {
+  button: {
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -28,13 +28,42 @@ export default function ApiFetcher() {
       });
   }, []);
 
+  const addToList = name => {
+    setCurrentItemList([...currentItemList, ` ${name}`]);
+    const filteredArr = itemList.filter(e => {return e.name !== name});
+    setItemList(filteredArr);
+  };
+
   return (
-    <div className={classes.root}>
-      {itemList.map(item => (
-        <Button key = {item.name} variant='contained'>
+    <>
+      <AppBar position='static'>
+        <p>Choose your favourite item!</p>
+      </AppBar>
+
+      <Container className={classes.button}>
+        {itemList.map(item => (
+          <Button
+            key={item.name}
+            variant='contained'
+            onClick={() => addToList(item.name)}
+          >
             <p>{item.name}</p>
-        </Button>
-      ))}
-    </div>
+          </Button>
+        ))}
+      </Container>
+
+      <Container className={classes.button}>
+        {currentItemList.map(item => (
+          <Button
+            key={item}
+            variant='contained'
+            // onClick={() => removeFromList(item.name)}
+          >
+            <p>{item}</p>
+          </Button>
+        ))}
+        {/* <p>{currentItemList}</p> */}
+      </Container>
+    </>
   );
 }
